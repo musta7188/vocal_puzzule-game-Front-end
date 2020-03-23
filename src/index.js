@@ -1,6 +1,7 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
-
+const img1 = document.querySelector(".image1")
+const img2 = document.querySelector(".image2")
 const startBtn = document.querySelector("#start-btn")
 const questionContainer = document.querySelector("#question-container")
 const nextBtn = document.querySelector("#next-btn")
@@ -15,18 +16,33 @@ function startGame(){
   ul.setAttribute("class", "letter-grid")
   questionContainer.removeAttribute("class", "hide")
 
-  fetchCards().then(cards => appendCard(cards))
+  fetchCards().then(cards => appendCards(cards))
 
 }
 
 
-function appendCard(cards_array){
- 
-  const card = cards_array[round]
+function appendCards(cards_array){
+ /// round is a variable that contain a number that start from 0
+  const currentCard = cards_array[round]
 
-appendOneCard(card)
+     appendImage(currentCard)
+     appendOneCard(currentCard)
 
 }
+
+function appendImage(cards_Obj){
+
+ const image1 = cards_Obj.image1
+ const image2 = cards_Obj.image2
+
+img1.setAttribute("src", image1)
+img2.setAttribute("src", image2)
+
+}
+
+
+
+
 
 
 function appendOneCard(card){
@@ -43,9 +59,6 @@ letters_array.forEach(letter => {
 });
 
 }
-
-
-
 
 
 
