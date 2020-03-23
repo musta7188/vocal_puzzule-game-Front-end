@@ -52,11 +52,12 @@ body.wrong{
 } */
 
 .block{
-  width: 50px;
+  width: 30px;
+  height: 30px;
 }
 
 li::first-letter {
-  font-size: 200%;
+  font-size: 100%;
   color: #8A2BE2;
 }
 
