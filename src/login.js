@@ -57,9 +57,30 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
 
 const BASE_URL = "http://localhost:3000"
 const PLAYERS_URL = `${BASE_URL}/players`
-const theLoginForm = document.querySelector("form") 
+const theLoginForm = document.querySelector("#createForm") 
 
 
 
 
-theLoginForm.addEventListener("submit")
+  theLoginForm.addEventListener("submit", (event) => {
+  event.preventDefault()
+   
+    const nameInput = event.target.elements.name.value
+    const passwordInput = event.target.elements.password.value
+     
+  console.log("submitted")
+
+      fetch(PLAYERS_URL, {
+        method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                      name: (nameInput),
+                      password: (passwordInput)
+                    })
+      })
+      .then(res => res.json())
+      .then(data => console.log(data))     
+  })
