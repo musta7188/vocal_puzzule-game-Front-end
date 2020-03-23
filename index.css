@@ -39,23 +39,24 @@ body.wrong{
   background-color: white;
   border-radius: 5px ;
   padding: 10px;
+  padding-right: 20px;
   padding-left: 60px;
   box-shadow: 0 0 10px 2px;
 }
 
-.letter-list{
+/* .letter-list{
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center; 
-}
+} */
 
 .block{
-  width: 100px;
+  width: 50px;
 }
 
 li::first-letter {
-  font-size: 400%;
+  font-size: 200%;
   color: #8A2BE2;
 }
 
@@ -63,23 +64,84 @@ img {
   border: 1px  #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 150px;
+  width: 90px;
   position: center;
 
+}
+
+.equal-sign{
+  border: 1px  #ddd;
+  border-radius: 4px;
+  padding: px;
+  width: 40px;
+  height: 40px;
 }
 
 .plus-imag {
   border: 1px  #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
 }
 
-.image-containr{
+ul{
+  list-style-type: none;
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.block{
+  border: solid rgb(0, 255, 200);
+  padding-left: 10px;
+
+  
+}
+
+.img-grid {
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 90px;
-  margin: 40px 0;
+  grid-template-columns: repeat(4, auto);
+  gap: 10px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+
+.letter-grid {
+  width: relative;
+  display: grid;
+  grid-template-columns: repeat(100, auto);
+  gap: 10px;
+  margin: 20px 0;
+ 
+}
+
+.btn {
+  --hue: var(--hue-neutral);
+  border: 1px solid hsl(var(--hue), 100%, 30%);
+  background-color: hsl(var(--hue), 100%, 50%);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  outline: none;
+}
+
+.btn:hover {
+  border-color: black;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none; 
+} 
