@@ -169,4 +169,81 @@ const changeUiFunction = () => {
   already.addEventListener("click", () => {
     event.preventDefault()
     changeUiFunction()
+    document.body.innerHTML = ""
+    
+     loadGamePage()
   })
+
+
+
+
+
+
+
+  // on successful login
+const loadGamePage = () => {
+  const divClassEmpty = document.createElement("div")
+  const divClassContainer = document.createElement("div")
+        divClassContainer.className = "container" 
+  const divQuestionContainerFirst = document.createElement("div")
+        divQuestionContainerFirst.className = "hide"
+        divQuestionContainerFirst.id = "question-container"
+
+        const divQuestion1 = document.createElement("div")
+        divQuestion1.id = "question"
+        divQuestion1.innerText = "Question 1"
+
+        const divQuestion2 = document.createElement("div")
+        divQuestion2.id = "question-container"
+        divQuestion2.className = "img-grid"
+
+          const img1 = document.createElement("img")
+          img1.className = "image1"
+          img1.src = ""
+          img1.alt = ""
+
+          const imgPlus = document.createElement("img")
+          imgPlus.className = "plus-imag"
+          imgPlus.src = "https://i.ya-webdesign.com/images/red-plus-png-1.png"
+          imgPlus.alt = ""
+
+          const img2 = document.createElement("img")
+          img2.className = "image2"
+          img2.src = ""
+          img2.alt = ""
+
+          const imgEqual = document.createElement("img")
+          imgEqual.className = "equal-sign"
+          imgEqual.src = "https://www.newharbinger.com/sites/default/files/article_assets/equal-sign-2-512.png"
+          imgEqual.alt = ""
+
+        const divLetter = document.createElement("div")
+        divLetter.className = "letter-container"
+          const ulLetterGrid = document.createElement("ul")
+          ulLetterGrid.className ="letter-grid hide" 
+
+        const divControls = document.createElement("div")
+        divControls.className = "controls"
+
+        const buttonStart = document.createElement("button")
+        buttonStart.id = "start-btn"
+        buttonStart.className = "start-btn btn"
+        buttonStart.innerText = "Start"
+
+        const buttonNext = document.createElement("button")
+        buttonNext.id = "next-btn"
+        buttonNext.className = "next-btn btn hide"
+        buttonNext.innerText = "Next"
+
+
+        divQuestion2.append(img1,imgPlus,img2,imgEqual)
+
+        divQuestionContainerFirst.append(divQuestion1,divQuestion2)
+
+        divLetter.append("ulLetterGrid")
+
+        divControls.append(buttonStart,buttonNext)
+
+        document.body.append(divClassEmpty,divClassContainer,divQuestionContainerFirst,divLetter,divControls)
+ 
+}
