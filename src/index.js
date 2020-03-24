@@ -1,14 +1,32 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
+
 const img1 = document.querySelector(".image1")
 const img2 = document.querySelector(".image2")
 const startBtn = document.querySelector("#start-btn")
 const questionContainer = document.querySelector("#question-container")
 const nextBtn = document.querySelector("#next-btn")
 const ul = document.querySelector(".letter-grid")
-const round = 0
+let round = 0
 
 startBtn.addEventListener("click", startGame);
+
+
+nextBtn.addEventListener("click",nextRound)
+
+function nextRound(){
+  round += 1
+  ul.innerText = ""
+  img1.removeAttribute("src")
+  img2.removeAttribute("src")
+
+  setTimeout(() => {
+    startGame();
+  }, 1000)
+  
+}
+
+
 
 function startGame(){
   startBtn.setAttribute("class", "hide")
@@ -19,6 +37,8 @@ function startGame(){
   fetchCards().then(cards => appendCards(cards))
 
 }
+
+
 
 
 function appendCards(cards_array){
@@ -41,12 +61,7 @@ img2.setAttribute("src", image2)
 }
 
 
-
-
-
-
 function appendOneCard(card){
-
 
 letters_array = card.word.split("")
 
