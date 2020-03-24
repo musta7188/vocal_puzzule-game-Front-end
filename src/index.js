@@ -9,6 +9,8 @@ const nextBtn = document.querySelector("#next-btn")
 const ul = document.querySelector(".letter-grid")
 let round = 0
 
+let currentUser = null;
+
 startBtn.addEventListener("click", startGame);
 
 
@@ -24,6 +26,17 @@ function nextRound(){
     startGame();
   }, 1000)
   
+}
+
+function endGame() {
+  fetch(/games, {
+    body: JSON.stringify({
+      user_id: currentUser.id,
+      score: score,
+      card_ids: []
+    })
+  })
+
 }
 
 

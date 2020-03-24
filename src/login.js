@@ -2,7 +2,7 @@
 
 // const anime = require('animejs');
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var current = null;
 document.querySelector('#name').addEventListener('focus', function(e) {
   if (current) current.pause();
@@ -53,120 +53,57 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
   });
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const already = document.querySelector("#already")
-const BASE_URL = "http://localhost:3000"
-const PLAYERS_URL = `${BASE_URL}/players`
-const createForm = document.querySelector("#createForm") 
+const BASE_URL = "http://localhost:3000"///set the base of the initial url
+const PLAYERS_URL = `${BASE_URL}/players`///get all the players
+
+
+
+ 
+const createForm = document.querySelector("#createForm") //select the initial form to create the user 
 let theFlag = true
+const imageLogPart = document.querySelector("#imageLogPart")//image div 
 
-const sessionsUrl = `${BASE_URL}/sessions`
+const signUp = document.querySelector("#signUp")
+const h2 = document.querySelector("#h2")//sign up phrase
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-const changeUiFunction = () => {
-      
-  if (theFlag == true) {
-  const labelName = document.querySelector("#labelName")
-  labelName.innerText = ""
-  labelName.innerText = "Name"
-
-  const labelPassword = document.querySelector("#labelPassword")
-  labelPassword.innerText = ""
-  labelPassword.innerText = "Password"
-
-  const loginButton = document.querySelector("#submit")
-  loginButton.value = ""
-  loginButton.value = "Login"
-
-  const color1 = document.querySelector("#stop876")
-  color1.style = "stop-color:rgb(0, 47, 255)"
-
-  const color2 = document.querySelector("#stop878")
-  color2.style = "stop-color:rgb(52, 255, 25)"
-
-  createForm.id = "loginForm"
-
-  const imageLogPart = document.querySelector("#imageLogPart")
-  const logImg = document.createElement("img")
-  logImg.remove()
-  logImg.src = "https://globalforestatlas.yale.edu/sites/default/files/resize/images/holzstapel-766737_640-350x233.jpg"
-  logImg.alt = "Login"
-  logImg.height = "140"
-  logImg.width = "140"
-  imageLogPart.append(logImg)
-
-  const h2 = document.querySelector("#h2")
-  h2.remove()
-
-  const signUp = document.querySelector("#signUp")
-  signUp.innerText = "🙄 Login to play the speech puzzle  By Mustafa & Bryn"
+createForm.addEventListener("submit", (event) => {
    
-  already.remove()
-
-  theFlag = false
-
-//second create listener 
-  const loginForm = document.querySelector("#loginForm")   
-  
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault()
-    const nameInput = event.target.elements.name.value
-    const passwordInput = event.target.elements.password.value
-
-      fetch(sessionsUrl,{
-        method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                      name: (nameInput),
-                      password: (passwordInput)
-                    })
-      })
-      .then(res => res.json())
-      .then(changeUiFunction)
-  })
-
-
-
-}
-  
-}
-
-
-
-
-
-//first create listener 
-  createForm.addEventListener("submit", (event) => {
   event.preventDefault()
-   
-    const nameInput = event.target.elements.name.value
-    const passwordInput = event.target.elements.password.value
-    //const changeStyle = document.querySelector("#changeStyle")
+ 
+  const nameInput = event.target.elements.name.value
+  const passwordInput = event.target.elements.password.value
+  //const changeStyle = document.querySelector("#changeStyle")
+  createPlayer(nameInput, passwordInput).then(player => {
+    currentUser = player
+  }) //return the new player created 
 
-    
-  
-      fetch(PLAYERS_URL, {
-        method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                      name: (nameInput),
-                      password: (passwordInput)
-                    })
-      })
-      .then(res => res.json())
-      .then(changeUiFunction)
-  })
+})
+
+function createPlayer(nameInput, passwordInput){
+data = {
+  method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json"
+              },
+              body: JSON.stringify({
+                name: (nameInput),
+                password: (passwordInput)
+              })
+}
+
+  return fetch(PLAYERS_URL, data)
+  .then(res => res.json())
+ 
+}
 
 
 
-  already.addEventListener("click", () => {
-    event.preventDefault()
-    changeUiFunction()
-  })
+
+
+
+ 
