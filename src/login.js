@@ -3,6 +3,7 @@
   const BASE_URL = "http://localhost:3000"///set the base of the initial url
   const PLAYERS_URL = `${BASE_URL}/players`///get all the players
 
+
 // const createForm = document.querySelector("#createForm") //select the initial form to create the user 
 // const imageLogPart = document.querySelector("#imageLogPart")//image div 
 
@@ -12,24 +13,32 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
-  function createPlayer(nameInput){
-    data = {
-    method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                  name: (nameInput)
-                })
-    }
+  // function createPlayer(nameInput){
+  //   data = {
+  //   method: "POST",
+  //               headers: {
+  //                   "Content-Type": "application/json",
+  //                   "Accept": "application/json"
+  //               },
+  //               body: JSON.stringify({
+  //                 name: (nameInput)
+  //               })
+  //   }
 
-    return fetch(PLAYERS_URL, data)
-    .then(res => res.json())
+  //   return fetch(PLAYERS_URL, data)
+  //   .then(res => res.json())
   
-  }
- 
+  // }
+
+
+
+  // createForm.addEventListener("submit", (event) => {
+   
+  //   event.preventDefault()
+   
+  //   const nameInput = event.target.elements.name.value
      
+
     // createPlayer(nameInput).then(player => {
     //   currentUser = player
     // }) //return the new player created 
@@ -38,14 +47,10 @@
   
   
 
-//clears the screen
-  const createCard = () => {
-  const loginForm = document.querySelector("#loginForm")
-  const divRemove  = document.querySelector("#divRemove")
-    divRemove.innerHTML = ""
-    loginForm.remove()
 
-    const para = document.createElement("p")
+  const createCard = () => {
+
+     
 
     const img1 = document.createElement("img")
     img1.src = "https://i.ya-webdesign.com/images/red-plus-png-1.png"
@@ -66,6 +71,7 @@
     if(createPlayer(nameInput)){
       createCard()
     }
+
 
   })
    

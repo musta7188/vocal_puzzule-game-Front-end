@@ -72,3 +72,49 @@
 //     event.preventDefault()
 //     changeUiFunction()
 //   })
+
+
+
+
+
+  // setTimeout(() => {
+  //   const li_1 = ul.getElementsByTagName("li")[0]
+  
+  //   const let_1 = letters_array[0]
+  
+  //   li_1.innerText = let_1
+  
+  // }, 3000)
+  
+  // setTimeout(() => {
+  //   const li_3 = ul.getElementsByTagName("li")[3]
+  
+  //   const let_3 = letters_array[3]
+  
+  //   li_3.innerText = let_3
+  
+  // }, 5000)
+  
+  // setTimeout(() => {
+  //   const list = ul.getElementsByTagName("li")
+  //   const last_element = ul.getElementsByTagName("li")[list.length -1]
+  
+  //   const let_last = letters_array[letters_array.length -1]
+  
+  //   last_element.innerText = let_last
+    
+  // }, 7000)
+  
+  // setTimeout(() => {
+  //   ul.innerText = ""
+  //   letters_array.forEach(letter => {
+  //     const li = document.createElement("li")
+  //   li.setAttribute("class", "block")
+  //   li.innerText =letter
+  //   ul.append(li)
+  //   console.log(event)
+
+  //   recognition.start();
+  //   })
+  
+  // }, 9000)
