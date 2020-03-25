@@ -1,138 +1,84 @@
-@import url('https://rsms.me/inter/inter-ui.css');
-::selection {
-  background: #2D2F36;
+body{
+  padding:0;
+  margin:0;
 }
-::-webkit-selection {
-  background: #2D2F36;
+.vid-container{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
 }
-::-moz-selection {
-  background: #2D2F36;
+.bgvid{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100vw;
 }
-body {
-  background: white;
-  font-family: 'Inter UI', sans-serif;
-  margin: 0;
-  padding: 20px;
+.inner-container{
+  width:400px;
+  height:400px;
+  position:absolute;
+  top:calc(50vh - 200px);
+  left:calc(50vw - 200px);
+  overflow:hidden;
 }
-.page {
-  background: #e2e2e5;
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 40px);
-  position: absolute;
-  place-content: center;
-  width: calc(100% - 40px);
+.bgvid.inner{
+  top:calc(-50vh + 200px);
+  left:calc(-50vw + 200px);
+  filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
+  -webkit-filter:blur(10px);
+  -ms-filter: blur(10px);
+  -o-filter: blur(10px);
+  filter:blur(10px);
 }
-@media (max-width: 767px) {
-  .page {
-    height: auto;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-  }
+.box{
+  position:absolute;
+  height:100%;
+  width:100%;
+  font-family:Helvetica;
+  color:rgb(82, 81, 82);
+  background:rgba(0,0,0,0.13);
+  padding:30px 0px;
 }
-.container {
-  display: flex;
-  height: 320px;
-  margin: 0 auto;
-  width: 640px;
+.box h1{
+  text-align:center;
+  margin:30px 0;
+  font-size:30px;
 }
-@media (max-width: 767px) {
-  .container {
-    flex-direction: column;
-    height: 630px;
-    width: 320px;
-  }
+.box input{
+  text-align:center;
+  display:block;
+  width:300px;
+  margin:20px auto;
+  padding:15px;
+  background:rgba(0,0,0,0.2);
+  color:rgb(43, 43, 43);
+  border:0;
 }
-.left {
-  background: white;
-  height: calc(100% - 40px);
-  top: 20px;
-  position: relative;
-  width: 50%;
+.box input:focus,.box input:active,.box button:focus,.box button:active{
+  outline:none;
 }
-@media (max-width: 767px) {
-  .left {
-    height: 100%;
-    left: 20px;
-    width: calc(100% - 40px);
-    max-height: 270px;
-  }
+#loginButton{
+  background:#ff6767;
+  border:0;
+  color:rgb(73, 73, 73);
+  padding:10px;
+  font-size:20px;
+  width:330px;
+  margin:20px auto;
+  display:block;
+  cursor:pointer;
 }
-.login {
-  font-size: 50px;
-  font-weight: 900;
-  margin: 50px 40px 40px;
+#loginButton:active{
+  background:#97fd22;
 }
-.eula {
-  color: #2D2F36;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 40px;
+.box p{
+  font-size:14px;
+  text-align:center;
 }
-.right {
-  background: #474A59;
-  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
-  color: #F1F1F2;
-  position: relative;
-  width: 50%;
-}
-@media (max-width: 767px) {
-  .right {
-    flex-shrink: 0;
-    height: 100%;
-    width: 100%;
-    max-height: 350px;
-  }
-}
-svg {
-  position: absolute;
-  width: 320px;
-}
-path {
-  fill: none;
-  stroke: url(#linearGradient);;
-  stroke-width: 4;
-  stroke-dasharray: 240 1386;
-}
-.form {
-  margin: 40px;
-  position: absolute;
-}
-label {
-  color:  #c2c2c5;
-  display: block;
-  font-size: 14px;
-  height: 16px;
-  margin-top: 20px;
-  margin-bottom: 5px;
-}
-input {
-  background: transparent;
-  border: 0;
-  color: #f2f2f2;
-  font-size: 20px;
-  height: 30px;
-  line-height: 30px;
-  outline: none !important;
-  width: 100%;
-}
-input::-moz-focus-inner { 
-  border: 0; 
-}
-#submit {
-  color: #707075;
-  margin-top: 40px;
-  transition: color 300ms;
-}
-#submit:focus {
-  color: #f2f2f2;
-}
-#submit:active {
-  color: #d0d0d2;
-}
-
-
-
+/* .box p span{
+  cursor:pointer;
+  color:#666;
+} */
 
 
 
@@ -151,7 +97,7 @@ input::-moz-focus-inner {
   box-sizing: border-box;
   font-family: fantasy;
 } */
-
+/* 
 :root{
  --hue-neutral: 200;
  --hue-wrong:0;
@@ -173,7 +119,7 @@ body{
 }
 
 /* this is the class correct that need to be added whenever the answer is right  */
-body.correct{
+/* body.correct{
 --hue: var(--hue-correct);
 }
 
@@ -200,7 +146,7 @@ body.wrong{
  justify-content: center; 
 } */
 
-.block{
+/* .block{
  width: 30px;
  height: 30px;
 }
@@ -294,4 +240,5 @@ ul{
 
 .hide {
  display: none; 
-} 
+}  
+  */
