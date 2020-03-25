@@ -1,4 +1,4 @@
-  /* *::before, *::after {
+*, *::before, *::after {
    box-sizing: border-box;
    font-family: fantasy;
 }
@@ -23,7 +23,7 @@ body{
   background-color: hsl(var(--hue), 110%, 30%);
 }
 
-/* this is the class correct that need to be added whenever the answer is right   
+/* this is the class correct that need to be added whenever the answer is right  */
 body.correct{
 --hue: var(--hue-correct);
 }
@@ -99,6 +99,8 @@ ul{
 .block{
   border: solid rgb(0, 255, 200);
   padding-left: 10px;
+
+  
 }
 
 .img-grid {
@@ -143,4 +145,4 @@ ul{
 
 .hide {
   display: none; 
-}   
+} 
