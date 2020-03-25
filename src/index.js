@@ -20,7 +20,8 @@ mic.addEventListener("click", event => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+///score logic 
+////
 
 
 const img1 = document.querySelector(".image1")
@@ -30,20 +31,28 @@ const questionContainer = document.querySelector("#question-container")
 const nextBtn = document.querySelector("#next-btn")
 const ul = document.querySelector(".letter-grid")
 let round = 0
-
+const originalBackG= document.body.style.background
 let currentUser = null;
 
+
+
+
+///insted of the start button///input filled to get user name
 startBtn.addEventListener("click", startGame);
 
 
 nextBtn.addEventListener("click", nextRound)
+
+
+
+
 
 function nextRound() {
   round += 1
   ul.innerText = ""
   img1.removeAttribute("src")
   img2.removeAttribute("src")
-
+  document.body.style.background = originalBackG;
   setTimeout(() => {
 
     startGame();
@@ -51,25 +60,17 @@ function nextRound() {
 
 }
 
-// function endGame() {
-//   fetch(/games, {
-//     body: JSON.stringify({
-//       user_id: currentUser.id,
-//       score: score,
-//       card_ids: []
-//     })
-//   })
-
-// }
 
 
 
 function startGame() {
+
   startBtn.setAttribute("class", "hide")
   nextBtn.setAttribute("class", "next-btn btn")
+  nextBtn.disabled = true;
   ul.setAttribute("class", "letter-grid")
-  questionContainer.removeAttribute("class", "hide")
-
+  questionContainer.removeAttribute("class", "hide");
+  
 
   fetchCards().then(cards => appendCards(cards))
 
@@ -81,6 +82,7 @@ function startGame() {
 function appendCards(cards_array) {
   /// round is a variable that contain a number that start from 0
   const currentCard = cards_array[round]
+
 
   appendImage(currentCard)
   appendOneCard(currentCard)
@@ -102,20 +104,19 @@ function appendOneCard(card) {
 
   recognition.addEventListener("result", event => {
 
-    guess = event.results[0][0].transcript.toLowerCase().trim();
+    guess = event.results[0][0].transcript.toLowerCase().trim().replace(/\s+/g, '');
     word = card.word.toLowerCase();
-
+  
     console.log(guess, word)
 
     if (guess == word) {
-      displayAllLetters(true, word.split(""))
+      displayAllLetters(true, word.split(""));
+      nextBtn.disabled = false;
     } else {
       flashBackgroundRed()
     }
 
   })
-
-
 
   letters_array = card.word.split("")
 
@@ -123,6 +124,11 @@ function appendOneCard(card) {
   timerLetter(letters_array);
 
 }
+
+
+
+
+
 
 function flashBackgroundRed() {
   const prevBgColor = document.body.style.background;
@@ -132,22 +138,41 @@ function flashBackgroundRed() {
   }, 500)
 }
 
+
+
+
+ //currect has a value of true or false
 function displayAllLetters(correct, letters_array) {
   if (correct) {
     document.body.style.background = "green";
+
+    appendAllLetters(letters_array)
+
   } else {
     document.body.style.background = "red";
+    
   }
 
+  appendAllLetters(letters_array)
+ 
+}
+
+
+
+
+///append all the letter once the time ends or the players guess the word
+function appendAllLetters(letters_array){
   ul.innerText = ""
   letters_array.forEach(letter => {
-    const li = document.createElement("li")
-    li.setAttribute("class", "block")
-    li.innerText = letter
-    ul.append(li)
-  })
-  clearTimeouts()
+  const li = document.createElement("li")
+  li.setAttribute("class", "block")
+  li.innerText = letter
+  ul.append(li)
+  clearTimeouts();
+})
+
 }
+
 
 let timeouts = []
 
@@ -176,15 +201,13 @@ function timerLetter(letters_array) {
 
 
   const finalTimeout = setTimeout(() => {
-    displayAllLetters(false, letters_array)
+    displayAllLetters(false, letters_array);
+    nextBtn.disabled = false;
   }, 9000)
 
   timeouts.push(finalTimeout)
 
 }
-
-
-
 
 
 function displayEmptySquare(letters_array) {
