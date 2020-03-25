@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// const BASE_URL = "http://localhost:3000"///set the base of the initial url
-// const PLAYERS_URL = `${BASE_URL}/players`///get all the players
+const BASE_URL = "http://localhost:3000"///set the base of the initial url
+const PLAYERS_URL = `${BASE_URL}/players`///get all the players
 
 
 
@@ -16,62 +16,52 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
-  function createPlayer(nameInput){
-    data = {
-    method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                  name: (nameInput)
-                })
-    }
+  // function createPlayer(nameInput){
+  //   data = {
+  //   method: "POST",
+  //               headers: {
+  //                   "Content-Type": "application/json",
+  //                   "Accept": "application/json"
+  //               },
+  //               body: JSON.stringify({
+  //                 name: (nameInput)
+  //               })
+  //   }
 
-    return fetch(PLAYERS_URL, data)
-    .then(res => res.json())
+  //   return fetch(PLAYERS_URL, data)
+  //   .then(res => res.json())
   
-  }
- 
-     
-    createPlayer(nameInput).then(player => {
-      currentUser = player
-    }) //return the new player created 
-  
+  // }
+
+
+
+  // createForm.addEventListener("submit", (event) => {
    
+  //   event.preventDefault()
+   
+  //   const nameInput = event.target.elements.name.value
+     
+     
+  //   createPlayer(nameInput).then(player => {
+  //     currentUser = player
+  //   }) //return the new player created 
+  
+  // })
 
 
 //submit button event
-  
-  
+  const loginButton = document.querySelector("#loginButton")
 
-//clears the screen
   const createCard = () => {
-  const loginForm = document.querySelector("#loginForm")
-  const divRemove  = document.querySelector("#divRemove")
-    divRemove.innerHTML = ""
-    loginForm.remove()
 
-    const para = document.createElement("p")
+     
 
-    const img1 = document.createElement("img")
-    img1.src = "https://i.ya-webdesign.com/images/red-plus-png-1.png"
-    img1.className =   
-        // <img class="image2" src="" alt="">
-        // <img class= "equal-sign" src="https://www.newharbinger.com/sites/default/files/article_assets/equal-sign-2-512.png" alt=""></img>
 
-        divRemove.append(img1)
   }
 
-   
-  loginForm.addEventListener("submit", (event) => {
-    const nameInput = event.target.elements.name.value
-debugger
+  loginButton.addEventListener("submit", (event) => {
     event.preventDefault()
-    
-    if(createPlayer()){
-      createCard()
-    }
-
+    debugger
+    console.log("hi")
   })
    
