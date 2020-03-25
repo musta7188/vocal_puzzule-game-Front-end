@@ -1,13 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// const BASE_URL = "http://localhost:3000"///set the base of the initial url
-// const PLAYERS_URL = `${BASE_URL}/players`///get all the players
+  const BASE_URL = "http://localhost:3000"///set the base of the initial url
+  const PLAYERS_URL = `${BASE_URL}/players`///get all the players
 
-
-
- 
 // const createForm = document.querySelector("#createForm") //select the initial form to create the user 
- 
 // const imageLogPart = document.querySelector("#imageLogPart")//image div 
 
 // const signUp = document.querySelector("#signUp")
@@ -34,14 +30,11 @@
   }
  
      
-    createPlayer(nameInput).then(player => {
-      currentUser = player
-    }) //return the new player created 
+    // createPlayer(nameInput).then(player => {
+    //   currentUser = player
+    // }) //return the new player created 
   
-   
-
-
-//submit button event
+ 
   
   
 
@@ -56,20 +49,21 @@
 
     const img1 = document.createElement("img")
     img1.src = "https://i.ya-webdesign.com/images/red-plus-png-1.png"
-    img1.className =   
-        // <img class="image2" src="" alt="">
-        // <img class= "equal-sign" src="https://www.newharbinger.com/sites/default/files/article_assets/equal-sign-2-512.png" alt=""></img>
-
-        divRemove.append(img1)
+    // img1.className = 
+    const img2 = document.createElement("img")
+    const img3 = document.createElement("img")
+    img3.src = "https://www.newharbinger.com/sites/default/files/article_assets/equal-sign-2-512.png"
+ 
+        divRemove.append(img1,img2,img3)
   }
 
    
   loginForm.addEventListener("submit", (event) => {
     const nameInput = event.target.elements.name.value
-debugger
+ 
     event.preventDefault()
     
-    if(createPlayer()){
+    if(createPlayer(nameInput)){
       createCard()
     }
 
