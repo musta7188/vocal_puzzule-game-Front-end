@@ -1,9 +1,7 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
-
-
+const scoreTag = document.querySelector("#score")
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
 const recognition = new SpeechRecognition();
 const mic = document.querySelector(".mic")
 
@@ -33,7 +31,7 @@ const ul = document.querySelector(".letter-grid")
 let round = 0
 const originalBackG= document.body.style.background
 let currentUser = null;
-
+let score = 0
 
 
 
@@ -64,6 +62,9 @@ function nextRound() {
 
 
 function startGame() {
+  
+  scoreTag.className = "scoreOn"
+  scoreTag.innerText = `Score: ${score}`
 
   startBtn.setAttribute("class", "hide")
   nextBtn.setAttribute("class", "next-btn btn")
@@ -83,6 +84,7 @@ function appendCards(cards_array) {
   /// round is a variable that contain a number that start from 0
   const currentCard = cards_array[round]
 
+  scoreTag.innerText = `Score: ${score}`
 
   appendImage(currentCard)
   appendOneCard(currentCard)
@@ -112,6 +114,7 @@ function appendOneCard(card) {
     if (guess == word) {
       displayAllLetters(true, word.split(""));
       nextBtn.disabled = false;
+      score ++
     } else {
       flashBackgroundRed()
     }
