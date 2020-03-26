@@ -13,7 +13,10 @@
 <div class="score" id="score">Score: </div>
 
 <body class="">
-  <div class="container">
+  <div id="lead-board" class="leadboard-container hide">
+  
+  </div>
+  <div class="container ">
     <div id="question-container" class="hide">
       <div id="question">Question 1</div>
       <div class="player-name"></div>
@@ -32,12 +35,13 @@
         <div class="controls">
           <form class= "player-form">
             <label for="name">First name:</label><br>
-            <input type="text" id="fname" name="name" placeholder="Player name" value=""><br>
+            <input type="text" id="name" name="name" placeholder="Player name" value=""><br>
              <button id="start-btn" class="start-btn btn submit">Start</button>
           </form> 
      
       <button type="button" class="mic" >🎤</button>
-      <button id="next-btn" class="next-btn btn hide">Next</button>
+      <button id="board-btn" class="btn hide">See LeadBoard</button>
+      <button id="next-btn" class="next-btn btn hide ">Next</button>
     </div>
   </div>
   

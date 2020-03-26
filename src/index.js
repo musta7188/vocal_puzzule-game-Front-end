@@ -28,8 +28,8 @@ function fetchCards() {
 
 
 
-
-
+const leadBoard = document.querySelector("#lead-board")
+const gameContainer = document.querySelector(".container")
 const img1 = document.querySelector(".image1")
 const img2 = document.querySelector(".image2")
 const startBtn = document.querySelector("#start-btn")
@@ -126,7 +126,26 @@ function endGame(){
 
    fetch(GAME_URL, data)
   .then(resp => resp.json())
-  .then(gameObj => console.log(gameObj[0]) )
+  .then(gameObj => {
+    gameContainer.innerText = `${gameObj.player.name}, you final score is ${gameObj.score}`
+   const boardBtn = document.createElement("button")
+   boardBtn.setAttribute("class", "btn")
+   boardBtn.innerText = "See Leader Board"
+   gameContainer.append(boardBtn);
+
+   boardBtn.addEventListener("click", event => {
+    gameContainer.setAttribute("class", "hide");
+    leadBoard.setAttribute("class", "leadboard-container")
+     
+     const divPlayer = document.createElement("div")
+     divPlayer.innerText = gameObj.player.name;
+     
+     leadBoard.append(divPlayer)
+
+   })
+
+
+  })
 
 }
 
