@@ -108,6 +108,12 @@ ul{
   list-style-type: none;
 }
 
+
+form {
+  position: relative;
+  align-content: center;
+}
+
 .start-btn, .next-btn {
   font-size: 1.5rem;
   font-weight: bold;
