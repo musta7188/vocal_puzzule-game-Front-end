@@ -15,7 +15,7 @@ recognition.interimResults = false;
 
 mic.addEventListener("click", event => {
   recognition.start();
-
+  mic.innerText = "🗣️"
 })
 
 
@@ -106,6 +106,23 @@ function startGame() {
 
   fetchCards().then(cards => appendCards(cards))
   
+   timer()
+}
+
+
+//timer
+const timer=()=>{
+  countdown.innerText = ""
+  let timeLeft = 10;
+  const downloadTimer = setInterval(function(){
+  if(timeLeft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Finished";
+  } else {
+    document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+  }
+  timeLeft -= 1;
+}, 1000);
 }
 
 
@@ -180,7 +197,7 @@ function appendGame(game, index){
 
 
 function nextRound() {
-  
+  mic.innerText = "🎤"
   round += 1
 
   if (round > 1){
@@ -197,7 +214,6 @@ function nextRound() {
   img2.removeAttribute("src")
   document.body.style.background = originalBackG;
   setTimeout(() => {
-     
     startGame();
   }, 1000)
    }
@@ -244,7 +260,7 @@ function cardRecog(card){
     guess = event.results[0][0].transcript.toLowerCase().trim().replace(/\s+/g, '')
      
     word = card.word.toLowerCase()
-     
+     debugger
     console.log(guess, word)
   
     if (guess == word) {
@@ -256,10 +272,8 @@ function cardRecog(card){
     } else {
       flashBackgroundRed()
     }
-   
   }
 recognition.addEventListener("result", handler)
-
 }
 
 function flashBackgroundRed() {
@@ -325,7 +339,7 @@ function timerLetter(letters_array) {
           const li = ul.getElementsByTagName("li")[i]
 
           li.innerText = letter
-        }, 3000 + (letterIndexes.indexOf(i) * 1000))
+        }, 4000 + (letterIndexes.indexOf(i) * 1000))
       }
       return false
     })
@@ -338,7 +352,7 @@ function timerLetter(letters_array) {
     if (handler){
     recognition.removeEventListener("result", handler)
     }
-  }, 9000)
+  }, 11000)
 
   timeouts.push(finalTimeout)
 

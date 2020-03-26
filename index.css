@@ -48,7 +48,14 @@ body.wrong{
 
 }
 
+.letter-container {
+  
+   
+  justify-content: center;
+  align-items: center;
+   
 
+}
  
 .container {
    
@@ -86,6 +93,10 @@ body.wrong{
 li::first-letter {
   font-size: 100%;
   color: #8A2BE2;
+}
+
+#countdown{
+  font-family:  Helvetica, sans-serif;
 }
 
 img {
