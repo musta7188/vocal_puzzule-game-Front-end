@@ -16,6 +16,7 @@
   <div class="container">
     <div id="question-container" class="hide">
       <div id="question">Question 1</div>
+      <div class="player-name"></div>
       <div id="question-container" class="img-grid">
         <img class="image1" src= "", alt=""> 
         <img class="plus-imag" src="https://i.ya-webdesign.com/images/red-plus-png-1.png" alt=""> 
@@ -27,9 +28,14 @@
             <ul class="letter-grid hide"  >
             </ul>
         </div>
-   
-    <div class="controls">
-      <button id="start-btn" class="start-btn btn">Start</button>
+         
+        <div class="controls">
+          <form class= "player-form">
+            <label for="name">First name:</label><br>
+            <input type="text" id="fname" name="name" placeholder="Player name" value=""><br>
+             <button id="start-btn" class="start-btn btn submit">Start</button>
+          </form> 
+     
       <button type="button" class="mic" >🎤</button>
       
       <button id="next-btn" class="next-btn btn hide">Next</button>

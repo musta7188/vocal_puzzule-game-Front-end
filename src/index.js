@@ -1,6 +1,11 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
+
+PLAYER_URL = "http://localhost:3000/players"
+
+
 const scoreTag = document.querySelector("#score")
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 const mic = document.querySelector(".mic")
@@ -23,10 +28,6 @@ function fetchCards() {
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///score logic 
-////
 
 
 const img1 = document.querySelector(".image1")
@@ -35,26 +36,68 @@ const startBtn = document.querySelector("#start-btn")
 const questionContainer = document.querySelector("#question-container")
 const nextBtn = document.querySelector("#next-btn")
 const ul = document.querySelector(".letter-grid")
+const form = document.querySelector(".player-form")
+const playerNameDiv = document.querySelector(".player-name")
 let round = 0
 const originalBackG= document.body.style.background
-let currentUser = null;
+
+
+let currentPlayer;
+
 let score = 0
 
 
 
-///insted of the start button///input filled to get user name
-startBtn.addEventListener("click", startGame);
 
-nextBtn.addEventListener("click", nextRound)
 
+function createPlayer(player_name){
+
+  const data = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    body: JSON.stringify(
+      {name: player_name}
+    )
+  }
+
+ return fetch(PLAYER_URL, data)
+  .then(resp => resp.json())
+
+}
+
+
+
+
+
+form.addEventListener("submit", event => {
+event.preventDefault();
+const player_name = event.target[0].value
+createPlayer(player_name).then(playerObj => {
+  currentPlayer = playerObj;
+
+  startGame();
+})
+})
+
+
+
+nextBtn.addEventListener("click", nextRound);
 
 
 
 function startGame() {
+
   
   scoreTag.className = "scoreOn"
   scoreTag.innerText = `Score: ${score}`
 
+
+  playerNameDiv.innerText = currentPlayer.name;
+  
+  form.setAttribute("class", "hide")
   startBtn.setAttribute("class", "hide")
   nextBtn.setAttribute("class", "next-btn btn")
   nextBtn.disabled = true;
@@ -82,9 +125,44 @@ const timer=()=>{
 }, 1000);
 }
 
+
+
+function endGame(){
+
+  const data = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    body: JSON.stringify({
+      player_id: currentPlayer.id,
+      score: score
+    })
+  }
+
+   fetch(GAME_URL, data)
+  .then(resp => resp.json())
+  .then(gameObj => console.log(gameObj[0]) )
+
+}
+
+
+
+
 function nextRound() {
   mic.innerText = "🎤"
   round += 1
+
+  if (round > 1){
+
+    nextBtn.innerText = "end game";
+    nextBtn.addEventListener("click", endGame)
+
+
+  }else{
+
+  console.log(round)
   ul.innerText = ""
   img1.removeAttribute("src")
   img2.removeAttribute("src")
@@ -92,6 +170,7 @@ function nextRound() {
   setTimeout(() => {
     startGame();
   }, 1000)
+   }
 }
 
 
@@ -106,7 +185,7 @@ function appendCards(cards_array) {
    appendImage(currentCard)
     
    appendOneCard(currentCard)
-    
+  
 }
 
 function appendImage(cards_Obj) {
@@ -141,7 +220,8 @@ function cardRecog(card){
     if (guess == word) {
       displayAllLetters(true, word.split(""))
       nextBtn.disabled = false
-      score += card.score
+      score ++;
+      scoreTag.innerText = `Score: ${score}`
       recognition.removeEventListener("result", handler)
     } else {
       flashBackgroundRed()
