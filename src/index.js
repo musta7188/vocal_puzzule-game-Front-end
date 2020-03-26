@@ -50,10 +50,6 @@ let score = 0
 
 
 
-
-
-
-
 function createPlayer(player_name){
 
   const data = {
@@ -92,9 +88,6 @@ nextBtn.addEventListener("click", nextRound);
 
 
 
-
-
-
 function startGame() {
 
   
@@ -115,8 +108,43 @@ function startGame() {
   
 }
 
+
+
+function endGame(){
+
+  const data = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    body: JSON.stringify({
+      player_id: currentPlayer.id,
+      score: score
+    })
+  }
+
+   fetch(GAME_URL, data)
+  .then(resp => resp.json())
+  .then(gameObj => console.log(gameObj[0]) )
+
+}
+
+
+
+
 function nextRound() {
+  
   round += 1
+
+  if (round > 1){
+
+    nextBtn.innerText = "end game";
+    nextBtn.addEventListener("click", endGame)
+
+
+  }else{
+
   console.log(round)
   ul.innerText = ""
   img1.removeAttribute("src")
@@ -126,7 +154,7 @@ function nextRound() {
      
     startGame();
   }, 1000)
-   
+   }
 }
 
 
@@ -141,7 +169,7 @@ function appendCards(cards_array) {
    appendImage(currentCard)
     
    appendOneCard(currentCard)
-   debugger
+  
 }
 
 function appendImage(cards_Obj) {
@@ -176,7 +204,8 @@ function cardRecog(card){
     if (guess == word) {
       displayAllLetters(true, word.split(""))
       nextBtn.disabled = false
-      score ++
+      score ++;
+      scoreTag.innerText = `Score: ${score}`
       recognition.removeEventListener("result", handler)
     } else {
       flashBackgroundRed()
