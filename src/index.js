@@ -109,6 +109,12 @@ function startGame() {
 }
 
 
+function getAllGames(){
+
+  return fetch(GAME_URL)
+  .then(resp => resp.json())
+}
+
 
 function endGame(){
 
@@ -136,11 +142,14 @@ function endGame(){
    boardBtn.addEventListener("click", event => {
     gameContainer.setAttribute("class", "hide");
     leadBoard.setAttribute("class", "leadboard-container")
+   
+
+
+     getAllGames().then(gamesObj => {
+       gamesObj.forEach(appendGame)
+     })
      
-     const divPlayer = document.createElement("div")
-     divPlayer.innerText = gameObj.player.name;
      
-     leadBoard.append(divPlayer)
 
    })
 
@@ -148,6 +157,14 @@ function endGame(){
   })
 
 }
+
+function appendGame(game, index){
+
+  const divPlayer = document.createElement("div")
+     divPlayer.innerText = `${index + 1}: ${game.player.name} score: ${game.score} `
+     leadBoard.append(divPlayer)
+}
+
 
 
 
