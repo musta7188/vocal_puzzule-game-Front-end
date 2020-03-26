@@ -10,7 +10,7 @@ recognition.interimResults = false;
 
 mic.addEventListener("click", event => {
   recognition.start();
-
+  mic.innerText = "🗣️"
 })
 
 
@@ -66,14 +66,13 @@ function startGame() {
 }
 
 function nextRound() {
+  mic.innerText = "🎤"
   round += 1
-  console.log(round)
   ul.innerText = ""
   img1.removeAttribute("src")
   img2.removeAttribute("src")
   document.body.style.background = originalBackG;
   setTimeout(() => {
-     
     startGame();
   }, 1000)
    
@@ -91,7 +90,7 @@ function appendCards(cards_array) {
    appendImage(currentCard)
     
    appendOneCard(currentCard)
-   debugger
+    
 }
 
 function appendImage(cards_Obj) {
@@ -120,21 +119,19 @@ function cardRecog(card){
     guess = event.results[0][0].transcript.toLowerCase().trim().replace(/\s+/g, '')
      
     word = card.word.toLowerCase()
-     
+     debugger
     console.log(guess, word)
   
     if (guess == word) {
       displayAllLetters(true, word.split(""))
       nextBtn.disabled = false
-      score ++
+      score += card.score
       recognition.removeEventListener("result", handler)
     } else {
       flashBackgroundRed()
     }
-   
   }
 recognition.addEventListener("result", handler)
-
 }
 
 function flashBackgroundRed() {

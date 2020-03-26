@@ -48,7 +48,14 @@ body.wrong{
 
 }
 
+.letter-container {
+  
+   
+  justify-content: center;
+  align-items: center;
+   
 
+}
  
 .container {
    
