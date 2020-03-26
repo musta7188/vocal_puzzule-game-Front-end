@@ -1,5 +1,6 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
+PLAYER_URL = "http://localhost:3000/players"
 
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -30,18 +31,54 @@ const startBtn = document.querySelector("#start-btn")
 const questionContainer = document.querySelector("#question-container")
 const nextBtn = document.querySelector("#next-btn")
 const ul = document.querySelector(".letter-grid")
+const form = document.querySelector(".player-form")
+const playerNameDiv = document.querySelector(".player-name")
 let round = 0
 const originalBackG= document.body.style.background
-let currentUser = null;
 
+let currentPlayer;
 
 
 
 ///insted of the start button///input filled to get user name
-startBtn.addEventListener("click", startGame);
 
 
-nextBtn.addEventListener("click", nextRound)
+
+function createPlayer(player_name){
+
+  const data = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    body: JSON.stringify(
+      {name: player_name}
+    )
+  }
+
+ return fetch(PLAYER_URL, data)
+  .then(resp => resp.json())
+
+}
+
+
+
+
+
+form.addEventListener("submit", event => {
+event.preventDefault();
+const player_name = event.target[0].value
+createPlayer(player_name).then(playerObj => {
+  currentPlayer = playerObj;
+
+  startGame();
+})
+})
+
+
+
+nextBtn.addEventListener("click", nextRound);
 
 
 
@@ -64,7 +101,11 @@ function nextRound() {
 
 
 function startGame() {
+debugger;
 
+  playerNameDiv.innerText = currentPlayer.name;
+  
+  form.setAttribute("class", "hide")
   startBtn.setAttribute("class", "hide")
   nextBtn.setAttribute("class", "next-btn btn")
   nextBtn.disabled = true;
