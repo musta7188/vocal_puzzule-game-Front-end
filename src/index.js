@@ -1,10 +1,12 @@
 GAME_URL = "http://localhost:3000/games"
 CARDS_URL = "http://localhost:3000/cards"
+
 PLAYER_URL = "http://localhost:3000/players"
 
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const scoreTag = document.querySelector("#score")
 
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 const mic = document.querySelector(".mic")
 
@@ -18,11 +20,14 @@ mic.addEventListener("click", event => {
 
 
 
+function fetchCards() {
+  return fetch(CARDS_URL)
+    .then(resp => resp.json())
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
 
-///score logic 
-////
+
+
 
 
 const img1 = document.querySelector(".image1")
@@ -36,11 +41,16 @@ const playerNameDiv = document.querySelector(".player-name")
 let round = 0
 const originalBackG= document.body.style.background
 
+
 let currentPlayer;
 
+let score = 0
 
 
-///insted of the start button///input filled to get user name
+
+
+
+
 
 
 
@@ -84,24 +94,13 @@ nextBtn.addEventListener("click", nextRound);
 
 
 
-function nextRound() {
-  round += 1
-  ul.innerText = ""
-  img1.removeAttribute("src")
-  img2.removeAttribute("src")
-  document.body.style.background = originalBackG;
-  setTimeout(() => {
-
-    startGame();
-  }, 1000)
-
-}
-
-
-
 
 function startGame() {
-debugger;
+
+  
+  scoreTag.className = "scoreOn"
+  scoreTag.innerText = `Score: ${score}`
+
 
   playerNameDiv.innerText = currentPlayer.name;
   
@@ -111,23 +110,38 @@ debugger;
   nextBtn.disabled = true;
   ul.setAttribute("class", "letter-grid")
   questionContainer.removeAttribute("class", "hide");
-  
 
   fetchCards().then(cards => appendCards(cards))
+  
+}
 
+function nextRound() {
+  round += 1
+  console.log(round)
+  ul.innerText = ""
+  img1.removeAttribute("src")
+  img2.removeAttribute("src")
+  document.body.style.background = originalBackG;
+  setTimeout(() => {
+     
+    startGame();
+  }, 1000)
+   
 }
 
 
-
-
 function appendCards(cards_array) {
+   
   /// round is a variable that contain a number that start from 0
-  const currentCard = cards_array[round]
+  let currentCard = cards_array[round]
+   
+   
+  scoreTag.innerText = `Score: ${score}`
 
-
-  appendImage(currentCard)
-  appendOneCard(currentCard)
-
+   appendImage(currentCard)
+    
+   appendOneCard(currentCard)
+   debugger
 }
 
 function appendImage(cards_Obj) {
@@ -141,35 +155,37 @@ function appendImage(cards_Obj) {
 }
 
 
-function appendOneCard(card) {
+function appendOneCard(card) {  
+  cardRecog(card);
+  letters_array = card.word.split("");
+  displayEmptySquare(letters_array);
+  timerLetter(letters_array);
+}
 
-  recognition.addEventListener("result", event => {
+let handler;
 
-    guess = event.results[0][0].transcript.toLowerCase().trim().replace(/\s+/g, '');
-    word = card.word.toLowerCase();
-  
+function cardRecog(card){
+  handler = event => {
+     
+    guess = event.results[0][0].transcript.toLowerCase().trim().replace(/\s+/g, '')
+     
+    word = card.word.toLowerCase()
+     
     console.log(guess, word)
-
+  
     if (guess == word) {
-      displayAllLetters(true, word.split(""));
-      nextBtn.disabled = false;
+      displayAllLetters(true, word.split(""))
+      nextBtn.disabled = false
+      score ++
+      recognition.removeEventListener("result", handler)
     } else {
       flashBackgroundRed()
     }
-
-  })
-
-  letters_array = card.word.split("")
-
-  displayEmptySquare(letters_array);
-  timerLetter(letters_array);
+   
+  }
+recognition.addEventListener("result", handler)
 
 }
-
-
-
-
-
 
 function flashBackgroundRed() {
   const prevBgColor = document.body.style.background;
@@ -182,7 +198,7 @@ function flashBackgroundRed() {
 
 
 
- //currect has a value of true or false
+ //current has a value of true or false
 function displayAllLetters(correct, letters_array) {
   if (correct) {
     document.body.style.background = "green";
@@ -244,6 +260,9 @@ function timerLetter(letters_array) {
   const finalTimeout = setTimeout(() => {
     displayAllLetters(false, letters_array);
     nextBtn.disabled = false;
+    if (handler){
+    recognition.removeEventListener("result", handler)
+    }
   }, 9000)
 
   timeouts.push(finalTimeout)
@@ -265,10 +284,4 @@ function displayEmptySquare(letters_array) {
 
 
 
-
-function fetchCards() {
-  return fetch(CARDS_URL)
-    .then(resp => resp.json())
-
-}
-
+ 

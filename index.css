@@ -1,5 +1,5 @@
 *, *::before, *::after {
-   box-sizing: border-box;
+   /* box-sizing: border-box; */
    font-family: fantasy;
 }
 
@@ -10,14 +10,12 @@
 }
 
 body{
-
   --hue: var(--hue-neutral);
-
   padding: 0;
   margin: 0;
   display: flex;
   width: 100vw;
-  height: 100vw;
+  height: 40vw;
   justify-content: center;
   align-items: center ;
   background-color: hsl(var(--hue), 110%, 30%);
@@ -32,8 +30,28 @@ body.wrong{
   --hue: var(--hue-wrong);
 }
 
+.score {
+ 
+  position: absolute;
+  top: 10px;
+    color: hsl(var(--hue), 110%, 30%); 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26px;
 
+}
+.scoreOn {
+  position: absolute;
+  top: 10px;
+    color: white; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26px;
+
+}
+
+
+ 
 .container {
+   
   width: 800px;
   max-width: 80%;
   background-color: white;
@@ -167,3 +185,4 @@ form {
   cursor: pointer;
   color: #333;
 }
+ 
