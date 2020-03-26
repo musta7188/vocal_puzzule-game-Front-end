@@ -132,31 +132,41 @@ function endGame(){
 
    fetch(GAME_URL, data)
   .then(resp => resp.json())
-  .then(gameObj => {
-    gameContainer.innerText = `${gameObj.player.name}, you final score is ${gameObj.score}`
-   const boardBtn = document.createElement("button")
-   boardBtn.setAttribute("class", "btn")
-   boardBtn.innerText = "See Leader Board"
-   gameContainer.append(boardBtn);
-
-   boardBtn.addEventListener("click", event => {
-    gameContainer.setAttribute("class", "hide");
-    leadBoard.setAttribute("class", "leadboard-container")
-   
-
-
-     getAllGames().then(gamesObj => {
-       gamesObj.forEach(appendGame)
-     })
-     
-     
-
-   })
-
-
-  })
+  .then(gameObj => showResults(gameObj))
 
 }
+
+
+function showResults(gameObj) { 
+  
+gameContainer.innerText = `${gameObj.player.name}, you final score is ${gameObj.score}`
+const boardBtn = document.createElement("button")
+boardBtn.setAttribute("class", "btn")
+boardBtn.innerText = "See Leader Board"
+gameContainer.append(boardBtn);
+
+boardBtn.addEventListener("click", () => {
+ gameContainer.setAttribute("class", "hide");
+ leadBoard.setAttribute("class", "leadboard-container")
+
+  getAllGames().then(gamesObj => {
+    gamesObj.forEach(appendGame)
+  })
+  
+
+})
+
+
+}
+
+
+
+
+
+
+
+
+
 
 function appendGame(game, index){
 
