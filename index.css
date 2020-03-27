@@ -48,13 +48,9 @@ body.wrong{
 
 }
 
-.letter-container {
-  
-   
+.letter-container { 
   justify-content: center;
   align-items: center;
-   
-
 }
  
 .container {
@@ -164,8 +160,16 @@ form {
   grid-template-columns: repeat(100, auto);
   gap: 10px;
   margin: 20px 0;
- 
 }
+
+
+@media(max-width:400px){
+  .letter-grid {
+    
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
 
 .btn {
   --hue: var(--hue-neutral);
